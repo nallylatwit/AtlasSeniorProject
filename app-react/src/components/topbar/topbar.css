@@ -9,6 +9,10 @@
     z-index: 999;
 }
 
+.topbarLink{
+    cursor: pointer;
+}
+
 
 .topbarLeft {
     flex: 3;
