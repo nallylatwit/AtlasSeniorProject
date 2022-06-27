@@ -93,7 +93,7 @@ export default function Rightbar({user}) {
           <span className="rightbarInfoValue">CompSci</span>
         </div>
       </div>
-      <h4 className="rightbarTitle">Friends</h4>
+      <h4 className="rightbarTitle">Following</h4>
       <div className="rightbarFollowings">
         {friends.map(friend=>(
           <Link to={"/profile/"+friend.username} style={{textDecoration: "none"}}>

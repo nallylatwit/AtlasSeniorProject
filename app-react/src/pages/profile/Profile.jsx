@@ -26,17 +26,17 @@ export default function Profile() {
     <Topbar/>
     <div className="profile">
 
-    <Sidebar />
+    {/* <Sidebar /> */}
     <div className="profileRight">
         <div className="profileRightTop">
             <div className="profileCover">
                 <img 
-                    src={user.coverPicture ? user.coverPicture : PF+"background.jpeg"} 
+                    src={user.coverPicture ? PF+user.coverPicture : PF+"background.jpeg"} 
                     alt="" 
                     className="profileCoverImg" 
                 />
                 <img 
-                    src={user.coverPicture ? user.coverPicture : PF+"person/default.jpeg"} 
+                    src={user.coverPicture ? PF.user.profilePicture : PF+"person/default.jpeg"} 
                     alt="" 
                     className="profileUserImg" 
                 />
