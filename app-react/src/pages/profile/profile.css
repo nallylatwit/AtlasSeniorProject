@@ -3,7 +3,11 @@
 }
 
 .profileRight{
-    flex: 9;
+    flex: 3;
+}
+
+.rightbar {
+    flex: 1;
 }
 
 profileCover {

@@ -1,4 +1,4 @@
-import { MoreVert } from '@material-ui/icons'
+import { MoreVert, FileCopySharp } from '@material-ui/icons'
 import React from 'react'
 import './post.css'
 import {useEffect, useState, useContext} from "react";
@@ -62,7 +62,7 @@ export default function Post({post}) {
             </div>
             <div className="postCenter">
                 <span className="postText">{post?.desc}</span>
-                <a href={PF+post.file} download='snippet' className='postFile'>View Snippet</a>
+                <a href={PF+post.file} download='snippet' className='postFile'><FileCopySharp /></a>
                 {/* <img 
                     src={PF+post.img} 
                     alt="" 
