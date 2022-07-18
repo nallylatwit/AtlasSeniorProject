@@ -5,7 +5,7 @@ import './login.css'
 //import {loginCall} from '../../apiCalls'
 import { AuthContext } from '../../context/AuthContext'
 import {CircularProgress} from '@material-ui/core'
-import { useEffect } from 'react';
+//import { useEffect } from 'react';
 
 
 export default function Login() {
