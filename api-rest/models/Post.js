@@ -17,6 +17,10 @@ const PostSchema = new mongoose.Schema (
         likes:{
             type:Array,
             default:[]
+        },
+        file: {
+            type: String,
+            max: 100
         }
     },
         {timestamps: true}

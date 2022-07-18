@@ -22,6 +22,19 @@ export default function Share() {
             desc: desc.current.value
         }
 
+        if (file) {
+            const data = new FormData();
+            const fileName = Date.now() + file.name;
+            data.append("name", fileName);
+            data.append("file", file);
+            newPost.file = fileName;
+            try {
+                await axios.post("/upload", data)
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
         try{
             await axios.post("/posts", newPost)
         } catch(err) {
@@ -48,7 +61,7 @@ export default function Share() {
                     <label htmlFor="file" className="shareOption">
                         <PermMedia htmlColor='tomato' className='shareIcon'/>
                         <span className="shareOptionText">Upload File</span>
-                        <input style={{display:"none"}} type="file" id="file"  accept=".js" onChange={(e)=>setFile(e.target.files[0])}/>
+                        <input style={{display:"none"}} type="file" id="file"  accept=".js" onChange={(e)=>setFile(e.target.files[0])} required/>
                     </label>
                     {/* <div className="shareOption">
                         <Label htmlColor='blue' className='shareIcon'/>

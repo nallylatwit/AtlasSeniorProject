@@ -62,11 +62,12 @@ export default function Post({post}) {
             </div>
             <div className="postCenter">
                 <span className="postText">{post?.desc}</span>
-                <img 
+                <a href={PF+post.file} download='snippet' className='postFile'>View Snippet</a>
+                {/* <img 
                     src={PF+post.img} 
                     alt="" 
                     className="postImg" 
-                />
+                /> */}
             </div>
             <div className="postBottom">
                 <div className="postBottomLeft">
@@ -76,12 +77,12 @@ export default function Post({post}) {
                         onClick={likeHandler}
                         alt="" 
                     />
-                    <img 
+                    {/* <img 
                         className='likeIcon' 
                         src={`${PF}heart.jpeg`}
                         onClick={likeHandler}
                         alt="" 
-                    />
+                    /> */}
                     <span className="postLikeCounter">{like} people liked.</span>
                 </div>
                 <div className="postBottomRight">
