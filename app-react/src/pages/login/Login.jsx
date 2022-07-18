@@ -1,20 +1,37 @@
 import React from 'react'
-import {useRef, useContext} from 'react';
+import axios from 'axios';
+import {useRef, useContext, useState} from 'react';
 import './login.css'
-import {loginCall} from '../../apiCalls'
+//import {loginCall} from '../../apiCalls'
 import { AuthContext } from '../../context/AuthContext'
 import {CircularProgress} from '@material-ui/core'
+import { useEffect } from 'react';
 
 
 export default function Login() {
 const email = useRef();
 const password = useRef();
-const {user, isFetching, error, dispatch} = useContext(AuthContext);
+const {isFetching, error, dispatch} = useContext(AuthContext);
+const [user, setUser] = useState();
+
+const loginCall = async (userCredential, dispatch) => {
+    dispatch({type: "LOGIN_START"});
+    try{
+        const res = await axios.post('/auth/login', userCredential);
+        console.log(res.data);
+        setUser(res.data);
+        localStorage.setItem('user', res.data);
+        dispatch({type: "LOGIN_SUCCESS", payload: res.data});
+    }catch(err){
+        dispatch({type: "LOGIN_FAILURE", payload: err});
+    }
+}
+
 
 
 const handleClick = (e) => {
     e.preventDefault();
-    loginCall({email: email.current.value , password:password.current.value}, dispatch)
+    loginCall({email: email.current.value , password:password.current.value}, dispatch);
 }
 
   return (
