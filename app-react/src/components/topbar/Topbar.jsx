@@ -34,11 +34,11 @@ export default function Topbar() {
             </div>
             <div className="topbarRight">
                 <div className="topbarLinks">
-                    <span className="topbarLinks">Homepage</span>
-                    <span className="topbarLinks">Timeline</span>
+                    {/* <span className="topbarLinks">Homepage</span>
+                    <span className="topbarLinks">Timeline</span> */}
                 </div>
                 <div className="topbarIcons">
-                    <div className="topbarIconItem">
+                    {/* <div className="topbarIconItem">
                         <Person />
                         <span className="topbarIconBadge">1</span>
                     </div>
@@ -49,7 +49,7 @@ export default function Topbar() {
                     <div className="topbarIconItem">
                         <Notifications />
                         <span className="topbarIconBadge">1</span>
-                    </div>
+                    </div> */}
                 </div>
                 <Link to={`/profile/${user.username}`}>
                     <img

@@ -41,6 +41,7 @@
 .postCenter {
     display: flex;
     margin: 20px 0;
+    justify-content: space-between;
 }
 
 .postImg {
@@ -81,7 +82,7 @@
 .postFile {
     flex: 1;
     margin-right: 0px;
-    
+
 }
 
 .postText {
