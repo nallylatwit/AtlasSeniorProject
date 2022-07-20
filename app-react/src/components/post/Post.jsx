@@ -38,6 +38,15 @@ export default function Post({post}) {
         setIsLiked(!isLiked)
     }
 
+    // try {
+    //     var filePath = PF+post.file
+    // }
+    // catch (err) {
+    //     console.log("NO FILE HERE");
+    //     var filePath = PF+"default.js"
+    // }
+
+
   return (
     <div className='post'>
         <div className="postWrapper">
@@ -62,7 +71,7 @@ export default function Post({post}) {
             </div>
             <div className="postCenter">
                 <span className="postText">{post?.desc}</span>
-                <a href={PF+post.file} download='snippet' className='postFile'><FileCopySharp /></a>
+                <a href={post.file ? PF + post.file : PF+'default.js'} download='snippet' className='postFile'><FileCopySharp /></a>
                 {/* <img 
                     src={PF+post.img} 
                     alt="" 
