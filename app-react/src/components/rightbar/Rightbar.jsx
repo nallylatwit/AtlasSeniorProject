@@ -12,37 +12,49 @@ import { AuthContext } from '../../context/AuthContext';
 export default function Rightbar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
-  const { user: currentUser, dispatch } = useContext(AuthContext);
-  var currentFollowingList = localStorage.getItem('currentFollowing');
-  const [followed, setFollowed] = useState(currentFollowingList.includes(user?._id));
-  var followTxt = "";
-  const [buttonText, setButtonText] = useState(followTxt);
-
-// TODO: fix this
+  const { user:currentUser, dispatch } = useContext(AuthContext);
+  //var currentFollowingList = localStorage.getItem('currentFollowing');
+  var friendArray = [];
+  var followTxt;
   useEffect(() => {
     const getMyFriends = async () => {
       try {
         const myFriendList = await axios.get("/users/friends/" + currentUser._id);
-        var friendArray = [];
-        console.log(myFriendList);
+        //console.log(myFriendList);
         for (var friend of Object.keys(myFriendList)) {
+          console.log(myFriendList);
           if (friend == "data") {
-            console.log(myFriendList[friend])
+            //console.log(myFriendList[friend])
             for (var i = 0; i < myFriendList[friend].length; i++) {
-              console.log(myFriendList[friend][i]._id)
+              //console.log(myFriendList[friend][i]._id)
               friendArray.push(myFriendList[friend][i]._id)
+              console.log(
+                "Is " +
+                user._id + " " +
+                "in the array: " +
+                friendArray + " ? " +
+                friendArray.includes(user._id) 
+                //+ ". Then we should: " +
+                //friendArray.includes(myFriendList[friend][i]._id) ? "Unfollow" : "Follow"
+                );
+              friendArray.includes(user._id) ? setButtonText("Unfollow") : setButtonText("Follow")
+              //followTxt = friendArray.includes(myFriendList[friend][i]._id) ? "Unfollow" : "Follow"
             }
           }
         }
         //console.log(myFriendList)
-        console.log(friendArray)
+        //console.log(followTxt);
+        //console.log(friendArray);
       } catch (err) {
         console.log(err);
       }
     }
     getMyFriends();
-    setFollowed(currentFollowingList.includes(user?.id));
+    //setFollowed(currentFollowingList.includes(user?.id));
   }, [currentUser, user])
+  const [followed, setFollowed] = useState(friendArray.includes(user?._id));
+  var fTxt = friendArray.includes(user?._id) ? "Unfollow" : "Follow";
+  const [buttonText, setButtonText] = useState(fTxt);
 
   useEffect(() => {
     const getFriends = async () => {
@@ -81,6 +93,9 @@ export default function Rightbar({ user }) {
         try {
           await axios.put("/users/" + user._id + "/unfollow", { userId: currentUser._id });
           console.log("USER UNFOLLOWED SUCCESSFULLY");
+          if (friendArray.length === 0) {
+            setButtonText("Follow");
+          }
           //setButtonText("Follow");
         } catch (err) {
           await axios.put("/users/" + user._id + "/follow", { userId: currentUser._id });
