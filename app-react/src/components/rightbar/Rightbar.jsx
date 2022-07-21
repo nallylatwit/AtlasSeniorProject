@@ -7,18 +7,18 @@ import { useState } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import {Add} from '@material-ui/icons'
+// import {Add} from '@material-ui/icons'
 
 export default function Rightbar({user}) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
   const {user:currentUser, dispatch} = useContext(AuthContext);
   const [followed, setFollowed] = useState(currentUser.following.includes(user?.id));
-  
+  var followTxt = currentUser.following.includes(user?.id) ? "Follow" : "Unfollow";
+  const [buttonText, setButtonText] = useState(followTxt);
 
   useEffect(() => {
     setFollowed(currentUser.following.includes(user?.id));
-
   }, [currentUser, user])
   
 
@@ -39,11 +39,14 @@ export default function Rightbar({user}) {
       if(followed){
         await axios.put("/users/"+user._id+"/follow", {userId: currentUser._id});
         dispatch({ type:"UNFOLLOW", payload: user._id});
+        setButtonText("Unfollow");
       } else if(!followed){
         try {
           await axios.put("/users/"+user._id+"/unfollow", {userId: currentUser._id});
+          setButtonText("Follow");
         } catch (err) {
           await axios.put("/users/"+user._id+"/follow", {userId: currentUser._id});
+          setButtonText("Unfollow");
         }
         dispatch({ type:"FOLLOW", payload: user._id});
       }
@@ -104,11 +107,12 @@ export default function Rightbar({user}) {
   };
 
   const ProfileRightBar = () => {
+
     return (
       <>
       {user.username !== currentUser.username && (
         <button className="rightbarFollowButton" onClick={handleClick}>
-          Follow<Add/>
+          {buttonText}{/*<Add/>*/}
         </button>
       )}
       <h4 className="rightbarTitle">User infor</h4>
@@ -145,8 +149,10 @@ export default function Rightbar({user}) {
       </div>
       </>
     )
+    
   }
-
+  // var followBtn = document.getElementById("rightBarFollowButton");
+  // followed ? followBtn.innerText = "Unfollow" : followBtn.innerText = "Follow";
   return (
     <div className='rightbar'>
       <div className="rightbarWrapper">
