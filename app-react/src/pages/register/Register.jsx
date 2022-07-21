@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React from 'react'
-import {useRef} from 'react'
+import {useRef, useContext, useState} from 'react'
 import './register.css'
 import {useNavigate} from "react-router";
+import { AuthContext } from '../../context/AuthContext';
 
 export default function Register() {
     const username = useRef();
@@ -10,6 +11,20 @@ export default function Register() {
     const password = useRef();
     const passwordAgain = useRef();
     const history = useNavigate();
+    const {dispatch} = useContext(AuthContext);
+    const [user, setUser] = useState();
+
+    const loginCall = async (userCredential, dispatch) => {
+        dispatch({type: "LOGIN_START"});
+        try {
+            const res = await axios.post('/auth/login', userCredential);
+            setUser(res.data);
+            localStorage.setItem('user', res.data);
+            dispatch({type: 'LOGIN_SUCCESS', payload: res.data})
+        } catch (err) {
+            dispatch({type: "LOGIN_FAILURE", payload: err});
+        }
+    }
 
     const handleClick = async (e) => {
         e.preventDefault();
@@ -23,7 +38,13 @@ export default function Register() {
             }
             try{
                 await axios.post('/auth/register', user);
-                history.push("/login");
+
+                try {
+                    loginCall({email: email.current.value, password:password.current.value}, dispatch);
+                } catch (err) {
+                    console.log(err);
+                }
+                //history.push("/login");
             } catch (err) {
                 console.log(err);
             }
@@ -68,7 +89,7 @@ export default function Register() {
                         type="password"
                     />
                     <button className="loginButton" type='submit'>Sign Up</button>
-                    <button className="loginRegisterButton">Login to Account</button>
+                    {/* <button className="loginRegisterButton">Login to Account</button> */}
                     
                 </form>
             </div>

@@ -68,10 +68,10 @@ const handleClick = (e) => {
                     <button className="loginButton" type="submit" disabled={isFetching}>
                         {isFetching ? <CircularProgress color="white" size="20px" /> : "Login"}
                     </button>
-                    <span className="loginForgot">Forgot Password?</span>
-                    <button className="loginRegisterButton">
+                    {/* <span className="loginForgot">Forgot Password?</span> */}
+                    {/* <button className="loginRegisterButton">
                         {isFetching ? <CircularProgress color="white" size="20px" /> : "Create Account"}
-                    </button>
+                    </button> */}
                     
                 </form>
             </div>
