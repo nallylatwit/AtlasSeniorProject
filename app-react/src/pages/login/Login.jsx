@@ -21,22 +21,20 @@ const loginCall = async (userCredential, dispatch) => {
         console.log(res.data.following);
         setUser(res.data);
         localStorage.setItem('user', res.data);
-        localStorage.setItem('currentFollowing', res.data.following);
-        let followingList = localStorage.getItem('currentFollowing');
-        if (typeof followingList === "string") {
-            followingList = [followingList];
-            localStorage.setItem('currentFollowing', followingList);
-        } else if (followingList === "") {
-            followingList = [];
-            localStorage.setItem('currentFollowing', followingList);
-        }        
+        // localStorage.setItem('currentFollowing', res.data.following);
+        // let followingList = localStorage.getItem('currentFollowing');
+        // if (typeof followingList === "string") {
+        //     followingList = [followingList];
+        //     localStorage.setItem('currentFollowing', followingList);
+        // } else if (followingList === "") {
+        //     followingList = [];
+        //     localStorage.setItem('currentFollowing', followingList);
+        // }
         dispatch({type: "LOGIN_SUCCESS", payload: res.data});
     }catch(err){
         dispatch({type: "LOGIN_FAILURE", payload: err});
     }
 }
-
-
 
 const handleClick = (e) => {
     e.preventDefault();
