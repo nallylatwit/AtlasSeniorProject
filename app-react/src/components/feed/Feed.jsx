@@ -20,6 +20,7 @@ export default function Feed({username}) {
         return new Date(p2.createdAt) - new Date(p1.createdAt)
       }))
     };
+    console.log("Search button clicked");
     fetchPosts();
   }, [username,user._id])
   

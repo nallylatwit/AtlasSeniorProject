@@ -43,7 +43,6 @@
 
 .searchIcon {
     font-size: 20px !important;
-    margin-left: 10px;
 }
 
 .searchInput {
@@ -94,4 +93,21 @@
     border-radius: 50%;
     object-fit: cover; 
     cursor: pointer;
+}
+
+.searchButton {
+    width: 30px;
+    height: 30px;
+    background-color: whitesmoke;
+    border-radius: 50%;
+    text-align: center;
+    border: none;
+}
+
+.searchButton:hover {
+    cursor: pointer;
+}
+
+.searchButton:active {
+    background-color: #124e9d;
 }

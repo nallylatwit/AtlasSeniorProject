@@ -17,6 +17,12 @@ export default function Topbar() {
         );
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        localStorage.setItem('searchTerm', document.getElementById('searchTxt').value);
+        //console.log(localStorage.getItem('searchTerm'));
+    }
+
     return (
         <div className='topbarContainer'>
             <div className="topbarLeft">
@@ -27,8 +33,12 @@ export default function Topbar() {
             </div>
             <div className="topbarCenter">
                 <div className="searchbar">
-                    <Search className='searchIcon'/>
-                    <input placeholder='search for a post' className="searchInput" />
+                    <form className='searchBox' onSubmit={handleSubmit}>
+                        <button className='searchButton' type='submit'>
+                            <Search className='searchIcon'/>
+                        </button>
+                        <input className="searchInput" type='text' id='searchTxt'/>
+                    </form>
                 </div>
             </div>
             <div className="topbarRight">
